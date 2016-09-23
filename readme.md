@@ -9,4 +9,4 @@ out to something like `keyboards/ergodox/keymaps/scottleeroberts`.
 $ git clone https://github.com/jackhumbert/qmk_firmware.git
 $ cd qmk_firmware
 $ git clone https://github.com/scottleeroberts/ergodox.git \keyboards/ergodox/keymaps/scottleeroberts
-$ make KEYBOARD=ergodox KEYMAP=scottleeroberts
+$ make teensy KEYBOARD=ergodox KEYMAP=scottleeroberts
