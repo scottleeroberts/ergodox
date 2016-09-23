@@ -1,8 +1,12 @@
-# The OSX Friendly Version of the Default Firmware
+## Building
 
-So, I took the default firmware and just made a couple of tweaks that make it easier to use with OS X:
+To build it you will need [qmk_firmware][qmk] checked out and this repo checked
+out to something like `keyboards/ergodox/keymaps/scottleeroberts`.
 
-1. The Cmd key is now on the right side, making Cmd+Space easier.
-2. The media keys work on OSX (But not on Windows).
+ [qmk]: https://github.com/jackhumbert/qmk_firmware
 
-![default osx](default_osx_highres.png)
+```
+$ git clone https://github.com/jackhumbert/qmk_firmware.git
+$ cd qmk_firmware
+$ git clone https://github.com/scottleeroberts/ergodox.git \keyboards/ergodox/keymaps/scottleeroberts
+$ make KEYBOARD=ergodox KEYMAP=scottleeroberts
