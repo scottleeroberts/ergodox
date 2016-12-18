@@ -83,19 +83,19 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 // SYMBOLS
 [SYMB] = KEYMAP(
        // left hand
-       KC_NO,   KC_F1,  KC_F2,  KC_F3,  KC_F4,  KC_F5,               KC_TRNS,
+       KC_NO,   KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,KC_TRNS,
        KC_TAB,KC_LBRC, KC_RBRC,LSFT(KC_LBRC),LSFT(KC_RBRC),KC_BSLS, KC_TRNS,
-       KC_TRNS,KC_TRNS,KC_TRNS,KC_TRNS,KC_TRNS,KC_TRNS,
+       KC_TRNS,KC_LBRC,KC_RBRC,LSFT(KC_LBRC),LSFT(KC_RBRC),KC_TRNS,
        KC_TRNS,KC_TRNS,KC_TRNS,KC_TRNS,KC_TRNS,KC_TRNS,             KC_TRNS,
           KC_TRNS,KC_TRNS,KC_TRNS,KC_TRNS,KC_TRNS,
                                        KC_TRNS,KC_TRNS,
                                                KC_TRNS,
                                KC_TRNS,KC_TRNS,KC_TRNS,
        // right hand
-       KC_TRNS, KC_F6,   KC_F7,  KC_F8,        KC_F9,         KC_F10,  KC_F11,
-       KC_TRNS, KC_LBRC, KC_RBRC,LSFT(KC_LBRC),LSFT(KC_RBRC), KC_TRNS, KC_TRNS,
-                KC_LEFT, KC_DOWN,KC_UP,        KC_RIGHT,      KC_TRNS, KC_TRNS,
-       KC_TRNS, KC_TRNS, KC_TRNS,KC_TRNS,      KC_TRNS,       KC_TRNS,  KC_TRNS,
+       KC_TRNS, KC_TRNS,  KC_TRNS,KC_TRNS,KC_TRNS, KC_TRNS,  KC_TRNS,
+       KC_TRNS, KC_TRNS, KC_TRNS,KC_TRNS,KC_TRNS, KC_TRNS, KC_TRNS,
+                KC_LEFT, KC_DOWN,KC_UP,KC_RIGHT,KC_TRNS, KC_TRNS,
+       KC_TRNS, KC_TRNS, KC_TRNS,KC_TRNS,KC_TRNS,KC_TRNS,  KC_TRNS,
                          KC_TRNS,KC_TRNS,      KC_TRNS,       KC_TRNS,  KC_TRNS,
        KC_TRNS, KC_TRNS,
        KC_TRNS,
