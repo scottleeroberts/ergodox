@@ -241,23 +241,16 @@ void matrix_scan_user(void) {
     ergodox_right_led_1_off();
     ergodox_right_led_2_off();
     ergodox_right_led_3_off();
-    switch (layer) {
-      // TODO: Make this relevant to the ErgoDox EZ.
-        case 1:
-            ergodox_right_led_1_on();
-            break;
-        case 2:
-            ergodox_right_led_2_on();
-            break;
-        default:
-            // none
-            break;
-    }
 
     // light up green when holding control
     if (keyboard_report->mods & MOD_BIT(KC_LCTRL)) {
       ergodox_right_led_on(2);
       ergodox_right_led_set(2, 100);
+    }
+    // light up red when holding ALT
+    if (keyboard_report->mods & MOD_BIT(KC_LALT)) {
+      ergodox_right_led_on(1);
+      ergodox_right_led_set(1, 100);
     }
      // light up blue when holding gui
     if (keyboard_report->mods & MOD_BIT(KC_LGUI)) {
