@@ -2,10 +2,11 @@
 #include "debug.h"
 #include "action_layer.h"
 
-#define BASE 0 // default layer
-#define SYMB 1 // symbols
+#define BASE 0  // default layer
+#define SYMB 1  // symbols
 #define MEDIA 2 // media keys
 #define KEITH 3 // keith keys
+#define TMUX 4  // tmux layer
 
 enum {
   TD_SCLN,
@@ -14,6 +15,15 @@ enum {
 };
 
 #define M_TMUX M(0)
+#define M_TMUX_1 M(1)
+#define M_TMUX_2 M(2)
+#define M_TMUX_3 M(3)
+#define M_TMUX_4 M(4)
+#define M_TMUX_5 M(5)
+#define M_TMUX_COPY_MODE M(6)
+#define M_TMUX_SP M(7)
+#define M_TMUX_VS M(8)
+#define M_TMUX_NEW M(9)
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 /* Keymap 0: Basic layer
@@ -21,10 +31,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * ,--------------------------------------------------.           ,--------------------------------------------------.
  * | ESC    |   1  |   2  |   3  |   4  |   5  |      |           | |    |   6  |   7  |   8  |   9  |   0  |  Bkspc |
  * |--------+------+------+------+------+-------------|           |------+------+------+------+------+------+--------|
- * | `      |   Q  |   W  |   E  |   R  |   T  |  {   |           |  }   |   Y  |   U  |   I  |   O  |   P  |   \    |
- * |--------+------+------+------+------+------|  [   |           |  ]   |------+------+------+------+------+--------|
- * | CTRL   |   A  | a/S  |   D  |  ^/F |   G  |------|           |------|   H  |  ^/J |   K  | a/L  |  ;   |   "    |
- * |--------+------+------+------+------+------|  L1  |           | Tab  |------+------+------+------+------+--------|
+ * | `      |   Q  |   W  |   E  |   R  |   T  |      |           |      |   Y  |   U  |   I  |   O  |   P  |   \    |
+ * |--------+------+------+------+------+------|      |           |      |------+------+------+------+------+--------|
+ * | CTRL   |   A  |alt/S |tmux/D|  ^/F |   G  |------|           |------|   H  |  ^/J |tmux/K|alt/L |  ;   |   "    |
+ * |--------+------+------+------+------+------|      |           | Tmux |------+------+------+------+------+--------|
  * | LShift |   Z  |   X  |   C  |   V  |   B  |      |           |      |   N  |   M  |   ,  |   .  |  /   |   =    |
  * `--------+------+------+------+------+-------------'           `-------------+------+------+------+------+--------'
  *   |LAlt  |      |      | L1   | L1   |                                       |  L1  | Down | left |Right | Up   |
@@ -43,7 +53,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         // left hand
         KC_ESC,         KC_1,         KC_2,   KC_3,   KC_4,   KC_5,         TG(KEITH),
         KC_GRAVE,       KC_Q,         KC_W,   KC_E,   KC_R,   KC_T,         KC_LBRACKET,
-        KC_LCTRL,       KC_A,         ALT_T(KC_S),   KC_D,   CTL_T(KC_F),   KC_G,
+        KC_LCTRL,       KC_A,         ALT_T(KC_S),   LT(TMUX,KC_D),   CTL_T(KC_F),   KC_G,
         KC_LSFT,        KC_Z,         KC_X,   KC_C,   KC_V,   KC_B,         KC_NO,
         KC_LALT,        KC_NO,        KC_LGUI,  KC_LGUI, KC_LGUI,
                                                         KC_ENTER,KC__MUTE,
@@ -52,7 +62,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
              // right hand
              KC_BSLS,     KC_6,   KC_7,   KC_8,   KC_9,   KC_0,             KC_BSPC,
              KC_RBRC,     KC_Y,   KC_U,   KC_I,   KC_O,   KC_P,             KC_MINS,
-                          KC_H,   CTL_T(KC_J),   KC_K,   ALT_T(KC_L),   KC_SCLN,   KC_QUOT,
+                          KC_H,   CTL_T(KC_J),   LT(TMUX,KC_K),   ALT_T(KC_L),   KC_SCLN,   KC_QUOT,
              M_TMUX,      KC_N,   KC_M,   KC_COMM,KC_DOT, KC_SLSH,          KC_EQUAL,
                                   MO(SYMB),  KC_DOWN,KC_LEFT,KC_RIGHT,      KC_UP,
              KC_NO,  KC_TAB,
@@ -83,7 +93,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 // SYMBOLS
 [SYMB] = KEYMAP(
        // left hand
-       KC_NO,   KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,KC_TRNS,
+       KC_NO,   KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,    KC_TRNS,
        KC_TAB,KC_LBRC, KC_RBRC,LSFT(KC_LBRC),LSFT(KC_RBRC),KC_BSLS, KC_TRNS,
        KC_TRNS,KC_LBRC,KC_RBRC,LSFT(KC_LBRC),LSFT(KC_RBRC),KC_TRNS,
        KC_TRNS,KC_TRNS,KC_TRNS,KC_TRNS,KC_TRNS,KC_TRNS,             KC_TRNS,
@@ -96,7 +106,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
        KC_TRNS, KC_TRNS, KC_TRNS,KC_TRNS,KC_TRNS, KC_TRNS, KC_TRNS,
                 KC_LEFT, KC_DOWN,KC_UP,KC_RIGHT,KC_TRNS, KC_TRNS,
        KC_TRNS, KC_TRNS, KC_TRNS,KC_TRNS,KC_TRNS,KC_TRNS,  KC_TRNS,
-                         KC_TRNS,KC_TRNS,      KC_TRNS,       KC_TRNS,  KC_TRNS,
+                         KC_TRNS,KC_TRNS, KC_TRNS, KC_TRNS,  KC_TRNS,
        KC_TRNS, KC_TRNS,
        KC_TRNS,
        KC_TRNS, KC_TRNS, KC_TRNS
@@ -162,6 +172,47 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     KC_PGUP,
     KC_PGDN,          KC_TAB, KC_ENT
 ),
+ /* Keymap 3: Tmux layer
+   *
+   * ,--------------------------------------------------.           ,--------------------------------------------------.
+   * |        |      |      |      |      |      |      |           |      |      |      |      |      |      |        |
+   * |--------+------+------+------+------+-------------|           |------+------+------+------+------+------+--------|
+   * |        |      |      |      |      |      |      |           |      |      |      |      |      |      |        |
+   * |--------+------+------+------+------+------|      |           |      |------+------+------+------+------+--------|
+   * |        |   1  |   2  |   3  |   4  |   5  |------|           |------|      |cmode | new  |  vs  | sp   |        |
+   * |--------+------+------+------+------+------|      |           |      |------+------+------+------+------+--------|
+   * |        |      |      |      |      |      |      |           |      |      |      |      |      |      |        |
+   * `--------+------+------+------+------+-------------'           `-------------+------+------+------+------+--------'
+   *   |      |      |      |      |      |                                       |      |      |      |      |      |
+   *   `----------------------------------'                                       `----------------------------------'
+   *                                        ,-------------.       ,-------------.
+   *                                        |      |      |       |      |      |
+   *                                 ,------|------|------|       |------+------+------.
+   *                                 |      |      |      |       |      |      |      |
+   *                                 |      |      |------|       |------|      |      |
+   *                                 |      |      |      |       |      |      |      |
+   *                                 `--------------------'       `--------------------'
+   */
+  [TMUX] = KEYMAP(
+      //left hand
+      KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
+      KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
+      KC_TRNS, M_TMUX_1, M_TMUX_2, M_TMUX_3, M_TMUX_4, M_TMUX_5,
+      KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
+      KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
+      KC_TRNS, KC_TRNS,
+      KC_TRNS,
+      KC_TRNS, KC_TRNS, KC_TRNS,
+      // right hand
+      KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
+      KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
+      KC_TRNS, M_TMUX_COPY_MODE, M_TMUX_NEW, M_TMUX_VS, M_TMUX_SP, KC_TRNS,
+      KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
+      KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
+      KC_TRNS, KC_TRNS,
+      KC_TRNS,
+      KC_TRNS, KC_TRNS, KC_TRNS
+      )
 };
 
 const uint16_t PROGMEM fn_actions[] = {
@@ -212,6 +263,19 @@ qk_tap_dance_action_t tap_dance_actions[] = {
   [TD_Z] = ACTION_TAP_DANCE_FN (do_tap_dance)
 };
 
+void do_tmux_key(keyrecord_t *record, uint8_t code, uint8_t modifier) {
+  if (record->event.pressed) {
+    register_code(KC_LCTRL);
+    register_code(KC_SPC);
+    unregister_code(KC_SPC);
+    unregister_code(KC_LCTRL);
+    register_code(modifier);
+    register_code(code);
+    unregister_code(code);
+    unregister_code(modifier);
+  }
+}
+
 const macro_t *action_get_macro(keyrecord_t *record, uint8_t id, uint8_t opt)
 {
   // MACRODOWN only works in this function
@@ -223,6 +287,33 @@ const macro_t *action_get_macro(keyrecord_t *record, uint8_t id, uint8_t opt)
         unregister_code(KC_SPC);
         unregister_code(KC_LCTRL);
       }
+      break;
+    case 1:
+      do_tmux_key(record, KC_1, KC_NO);
+      break;
+    case 2:
+      do_tmux_key(record, KC_2, KC_NO);
+      break;
+    case 3:
+      do_tmux_key(record, KC_3, KC_NO);
+      break;
+    case 4:
+      do_tmux_key(record, KC_4, KC_NO);
+      break;
+    case 5:
+      do_tmux_key(record, KC_5, KC_NO);
+      break;
+    case 6:
+      do_tmux_key(record, KC_LBRC, KC_NO);
+      break;
+    case 7:
+      do_tmux_key(record, KC_QUOT, KC_LSFT);
+      break;
+    case 8:
+      do_tmux_key(record, KC_5, KC_LSFT);
+      break;
+    case 9:
+      do_tmux_key(record, KC_C, KC_NO);
       break;
   }
   return MACRO_NONE;
