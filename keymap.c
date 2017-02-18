@@ -37,10 +37,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |--------+------+------+------+------+------|      |           | Tmux |------+------+------+------+------+--------|
  * | LShift |   Z  |   X  |   C  |   V  |   B  |      |           |      |   N  |   M  |   ,  |   .  |  /   |   =    |
  * `--------+------+------+------+------+-------------'           `-------------+------+------+------+------+--------'
- *   |LAlt  |      |      | L1   | L1   |                                       |  L1  | Down | left |Right | Up   |
+ *   |LAlt  |      |      |      | L1   |                                       |  L1  |      |      |      |      |
  *   `----------------------------------'                                       `----------------------------------'
  *                                        ,-------------.       ,-------------.
- *                                        |      |Mute  |       |      | Tab  |
+ *                                        |      |Mute  |       |      |      |
  *                                 ,------|------|------|       |------+--------+------.
  *                                 |      |      | VolUp|       |      |        |      |
  *                                 | Enter|Backsp|------|       |------|  Tab   |Space |
@@ -64,8 +64,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
              KC_RBRC,     KC_Y,   KC_U,   KC_I,   KC_O,   KC_P,             KC_MINS,
                           KC_H,   CTL_T(KC_J),   LT(TMUX,KC_K),   ALT_T(KC_L),   KC_SCLN,   KC_QUOT,
              M_TMUX,      KC_N,   KC_M,   KC_COMM,KC_DOT, KC_SLSH,          KC_EQUAL,
-                                  MO(SYMB),  KC_DOWN,KC_LEFT,KC_RIGHT,      KC_UP,
-             KC_NO,  KC_TAB,
+                                  MO(SYMB),  KC_NO,KC_NO,KC_NO,      KC_NO,
+             KC_NO,  KC_NO,
              KC_NO,
              KC_NO,  KC_TAB, KC_SPC
     ),
