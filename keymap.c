@@ -5,14 +5,7 @@
 #define BASE 0  // default layer
 #define SYMB 1  // symbols
 #define MEDIA 2 // media keys
-#define KEITH 3 // keith keys
-#define TMUX 4  // tmux layer
-
-enum {
-  TD_SCLN,
-  TD_SPC,
-  TD_Z
-};
+#define TMUX 3  // tmux layer
 
 #define M_TMUX M(0)
 #define M_TMUX_1 M(1)
@@ -51,7 +44,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 // Otherwise, it needs KC_*
 [BASE] = KEYMAP(  // layer 0 : default
         // left hand
-        KC_ESC,         KC_1,         KC_2,   KC_3,   KC_4,   KC_5,         TG(KEITH),
+        KC_ESC,         KC_1,         KC_2,   KC_3,   KC_4,   KC_5,         KC_NO,
         KC_GRAVE,       KC_Q,         KC_W,   KC_E,   KC_R,   KC_T,         KC_LBRACKET,
         KC_LCTRL,       KC_A,         LGUI_T(KC_S),   LT(TMUX,KC_D),   CTL_T(KC_F),   KC_G,
         KC_LSFT,        KC_Z,         KC_X,   KC_C,   KC_V,   KC_B,         KC_NO,
@@ -111,26 +104,6 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
        KC_TRNS,
        KC_TRNS, KC_TRNS, KC_TRNS
 ),
-[KEITH] = KEYMAP(  // layer 0 : default
-    // left hand
-    KC_EQL,           KC_1,         KC_2,   KC_3,   KC_4,   KC_5,   KC_TRNS,
-    KC_DELT,          KC_Q,         KC_W,   KC_F,   KC_P,   KC_G,   KC_NO,
-    KC_BSPC,          KC_A,         KC_R,   KC_S,   CTL_T(KC_T),   KC_D,
-    KC_LSFT,          TD(TD_Z),         KC_X,   KC_C,   KC_V,   KC_B,   ALL_T(KC_NO),
-    KC_GRV, KC_QUOT,      LALT(KC_LSFT),  KC_LEFT,KC_RGHT,
-    ALT_T(KC_APP),    KC_LGUI,
-    KC_HOME,
-    TD(TD_SPC),           KC_BSPC,     CTL_T(KC_ESC),
-    // right hand
-    KC_NO ,         KC_6,   KC_7,   KC_8,   KC_9,   KC_0,             KC_MINS,
-    M_TMUX,            KC_J,   KC_L,  KC_U,   KC_Y,   TD(TD_SCLN),             KC_BSLS,
-    KC_H,             CTL_T(KC_N),    KC_E,   KC_I,   KC_O,          GUI_T(KC_QUOT),
-    MEH_T(KC_NO),     KC_K,   KC_M,   KC_COMM,KC_DOT, KC_SLSH,   KC_RSFT,
-    KC_UP,            KC_DOWN,KC_LBRC,KC_RBRC,          KC_NO,
-    KC_LALT,          CTL_T(KC_ESC),
-    KC_PGUP,
-    KC_PGDN,          KC_TAB, KC_ENT
-),
  /* Keymap 3: Tmux layer
    *
    * ,--------------------------------------------------.           ,--------------------------------------------------.
@@ -174,53 +147,6 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
       )
 };
 
-const uint16_t PROGMEM fn_actions[] = {
-    [1] = ACTION_LAYER_TAP_TOGGLE(SYMB)                // FN1 - Momentary Layer 1 (Symbols)
-};
-
-void do_tap_dance (qk_tap_dance_state_t *state) {
-  switch (state->keycode) {
-    case TD(TD_SCLN):
-      if (state->count == 1) {
-        register_code (KC_SCLN);
-        unregister_code (KC_SCLN);
-      } else {
-        register_code (KC_LSFT);
-        register_code (KC_SCLN);
-        unregister_code (KC_SCLN);
-        unregister_code (KC_LSFT);
-        reset_tap_dance (state);
-      }
-      break;
-    case TD(TD_SPC):
-      if (state->count == 1) {
-        register_code (KC_SPC);
-        unregister_code (KC_SPC);
-      } else {
-        register_code (KC_LSFT);
-        register_code (KC_MINS);
-        unregister_code (KC_MINS);
-        unregister_code (KC_LSFT);
-        reset_tap_dance (state);
-      }
-      break;
-    case TD(TD_Z):
-      if (state->count == 1) {
-        register_code (KC_Z);
-        unregister_code (KC_Z);
-      } else {
-        set_oneshot_mods (MOD_LGUI);
-        reset_tap_dance (state);
-      }
-      break;
-  }
-}
-
-qk_tap_dance_action_t tap_dance_actions[] = {
-  [TD_SCLN] = ACTION_TAP_DANCE_FN (do_tap_dance),
-  [TD_SPC] = ACTION_TAP_DANCE_FN (do_tap_dance),
-  [TD_Z] = ACTION_TAP_DANCE_FN (do_tap_dance)
-};
 
 void do_tmux_key(keyrecord_t *record, uint8_t code, uint8_t modifier) {
   if (record->event.pressed) {
@@ -284,8 +210,6 @@ void matrix_init_user(void) {
 
 // Runs constantly in the background, in a loop.
 void matrix_scan_user(void) {
-
-    uint8_t layer = biton32(layer_state);
 
     ergodox_board_led_off();
     ergodox_right_led_1_off();
