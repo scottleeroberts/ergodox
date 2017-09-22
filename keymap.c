@@ -18,6 +18,29 @@
 #define M_TMUX_VS M(8)
 #define M_TMUX_NEW M(9)
 
+#define rgblight_set_teal rgblight_setrgb(0x00, 0xFF, 0xFF)
+#define rgblight_set_red rgblight_setrgb(0xFF, 0x00, 0x00)
+#define rgblight_set_green rgblight_setrgb(0x00, 0xFF, 0x00);
+#define rgblight_set_blue rgblight_setrgb(0x00, 0x00, 0xFF);
+#define rgblight_set_yellow rgblight_setrgb(0xFF, 0xFF, 0x00);
+
+enum custom_keycodes {
+  PLACEHOLDER = SAFE_RANGE, // can always be here
+  TEAL,
+  RED,
+  BLUE,
+  GREEN,
+  YELLOW,
+  BREATH,
+  TOGGLE,
+  RAINBOW,
+  SWIRL,
+  KNIGHT,
+  XMAS,
+  OTHER,
+  STILL
+};
+
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 /* Keymap 0: Basic layer
  *
@@ -44,7 +67,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 // Otherwise, it needs KC_*
 [BASE] = KEYMAP(  // layer 0 : default
         // left hand
-        KC_ESC,         KC_1,         KC_2,   KC_3,   KC_4,   KC_5,         KC_NO,
+          KC_ESC,         KC_1,         KC_2,   KC_3,   KC_4,   KC_5,         KC_NO,
         KC_GRAVE,       KC_Q,         KC_W,   KC_E,   KC_R,   KC_T,         KC_LBRACKET,
         KC_LCTRL,       KC_A,         LGUI_T(KC_S),   LT(TMUX,KC_D),   CTL_T(KC_F),   KC_G,
         KC_LSFT,        KC_Z,         KC_X,   KC_C,   KC_V,   KC_B,         KC_NO,
@@ -71,9 +94,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |--------+------+------+------+------+------|      |           |      |------+------+------+------+------+--------|
  * |        |  [   |   ]  |   {  |   }  |      |------|           |------| left | down | up   | right|      |        |
  * |--------+------+------+------+------+------|      |           |      |------+------+------+------+------+--------|
- * |        |      |      |      |      |      |      |           |      |      |      |      |      |      |        |
+ * |        |      |      |      |      |      |      |           |      |      | TEAL | RED  | GREEN| BLUE | YELLOW |
  * `--------+------+------+------+------+-------------'           `-------------+------+------+------+------+--------'
- *   |      |      |      |      |      |                                       |      |      |      |      |      |
+ *   |TOGGLE|BREATH|KNIGHT| XMAS | OTHER|                                       |      |RAINBW| STILL| SWIRL|       |
  *   `----------------------------------'                                       `----------------------------------'
  *                                        ,-------------.       ,-------------.
  *                                        |      |      |       |      |      |
@@ -90,7 +113,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
        KC_TAB,KC_TRNS, KC_TRNS,KC_TRNS,KC_TRNS,KC_TRNS, KC_TRNS,
        KC_TRNS,KC_LBRC,KC_RBRC,LSFT(KC_LBRC),LSFT(KC_RBRC),KC_TRNS,
        KC_TRNS,KC_TRNS,KC_TRNS,KC_TRNS,KC_TRNS,KC_TRNS,             KC_TRNS,
-          KC_TRNS,KC_TRNS,KC_TRNS,KC_TRNS,KC_TRNS,
+          TOGGLE,BREATH,KNIGHT,XMAS,OTHER,
                                        KC_TRNS,KC_TRNS,
                                                KC_TRNS,
                                KC_TRNS,KC_TRNS,KC_TRNS,
@@ -98,8 +121,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
        KC_TRNS, KC_TRNS,  KC_TRNS,KC_TRNS,KC_TRNS, KC_TRNS,  KC_TRNS,
        KC_TRNS, KC_TRNS, KC_TRNS,KC_TRNS,KC_TRNS, KC_TRNS, KC_TRNS,
                 KC_LEFT, KC_DOWN,KC_UP,KC_RIGHT,KC_TRNS, KC_TRNS,
-       KC_TRNS, KC_TRNS, KC_TRNS,KC_TRNS,KC_TRNS,KC_TRNS,  KC_TRNS,
-                         KC_TRNS,KC_TRNS, KC_TRNS, KC_TRNS,  KC_TRNS,
+       KC_TRNS, KC_TRNS, TEAL,RED,BLUE,GREEN,YELLOW,
+                         KC_TRNS,STILL, RAINBOW, SWIRL, KC_TRNS,
        KC_TRNS, KC_TRNS,
        KC_TRNS,
        KC_TRNS, KC_TRNS, KC_TRNS
@@ -205,8 +228,98 @@ const macro_t *action_get_macro(keyrecord_t *record, uint8_t id, uint8_t opt)
 };
 // Runs just one time when the keyboard initializes.
 void matrix_init_user(void) {
-
+  eeconfig_init();
 };
+
+bool process_record_user(uint16_t keycode, keyrecord_t *record) {
+  switch (keycode) {
+    // dynamically generate these.
+    case TEAL:
+      if (record->event.pressed) {
+        rgblight_mode(1);
+        rgblight_set_teal;
+      }
+      return false;
+      break;
+    case RED:
+      if (record->event.pressed) {
+        rgblight_mode(1);
+        rgblight_set_red;
+      }
+      return false;
+      break;
+    case BLUE:
+      if (record->event.pressed) {
+        rgblight_mode(1);
+        rgblight_set_blue;
+      }
+      return false;
+      break;
+    case GREEN:
+      if (record->event.pressed) {
+        rgblight_mode(1);
+        rgblight_set_green;
+      }
+      return false;
+      break;
+    case YELLOW:
+      if (record->event.pressed) {
+       rgblight_mode(1);
+        rgblight_set_yellow;
+      }
+      return false;
+      break;
+    case BREATH:
+      if (record->event.pressed) {
+        rgblight_mode(5);
+      }
+      return false;
+      break;
+    case TOGGLE:
+      if (record->event.pressed) {
+        rgblight_toggle();
+      }
+      return false;
+      break;
+    case RAINBOW:
+      if (record->event.pressed) {
+        rgblight_mode(7);
+      }
+      return false;
+      break;
+    case SWIRL:
+      if (record->event.pressed) {
+        rgblight_mode(12);
+      }
+      return false;
+      break;
+    case KNIGHT:
+      if (record->event.pressed) {
+        rgblight_mode(22);
+      }
+      return false;
+      break;
+    case XMAS:
+      if (record->event.pressed) {
+        rgblight_mode(24);
+      }
+      return false;
+      break;
+    case OTHER:
+      if (record->event.pressed) {
+        rgblight_mode(30);
+      }
+      return false;
+      break;
+    case STILL:
+      if (record->event.pressed) {
+        rgblight_mode(1);
+      }
+      return false;
+      break;
+  }
+  return true;
+}
 
 // Runs constantly in the background, in a loop.
 void matrix_scan_user(void) {
