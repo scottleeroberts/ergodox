@@ -41,6 +41,10 @@ enum custom_keycodes {
   STILL
 };
 
+enum tap_tances {
+  TD_SPACE
+};
+
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 /* Keymap 0: Basic layer
  *
@@ -83,7 +87,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                                   MO(SYMB),  KC_NO,KC_NO,KC_NO,      KC_NO,
              KC_NO,  KC_NO,
              KC_NO,
-             KC_NO,  KC_TAB, KC_SPC
+             KC_NO,  KC_TAB, TD(TD_SPACE)
     ),
 /* Keymap 1: Symbol Layer
  *
@@ -170,6 +174,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
       )
 };
 
+qk_tap_dance_action_t tap_dance_actions[] = {
+  [TD_SPACE] = ACTION_TAP_DANCE_DOUBLE(KC_SPC, KC_UNDERSCORE)
+};
 
 void do_tmux_key(keyrecord_t *record, uint8_t code, uint8_t modifier) {
   if (record->event.pressed) {
