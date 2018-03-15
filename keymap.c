@@ -6,6 +6,7 @@
 #define SYMB 1  // symbols
 #define MEDIA 2 // media keys
 #define TMUX 3  // tmux layer
+#define NUMBERS 4  // tmux layer
 
 #define M_TMUX M(0)
 #define M_TMUX_1 M(1)
@@ -53,7 +54,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |--------+------+------+------+------+------|      |           | Tmux |------+------+------+------+------+--------|
  * | LShift |   Z  |   X  |   C  |   V  |   B  |      |           |      |   N  |   M  |   ,  |   .  |  /   |   =    |
  * `--------+------+------+------+------+-------------'           `-------------+------+------+------+------+--------'
- *   |LAlt  |      |      |      |LShift|                                       |  L1  |      |      |      |      |
+ *   |LAlt  |      |      |      |NumLayer|                                       |  L1  |      |      |      |      |
  *   `----------------------------------'                                       `----------------------------------'
  *                                        ,-------------.       ,-------------.
  *                                        |      |Mute  |       |      |      |
@@ -71,8 +72,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         KC_GRAVE,       KC_Q,         KC_W,   KC_E,   KC_R,   KC_T,         KC_LBRACKET,
         KC_LCTRL,       KC_A,         LGUI_T(KC_S),   LT(TMUX,KC_D),   CTL_T(KC_F),   KC_G,
         KC_LSFT,        KC_Z,         KC_X,   KC_C,   KC_V,   KC_B,         KC_NO,
-        KC_LALT,        KC_NO,        KC_LGUI,  KC_LGUI, KC_LSFT,
+        KC_LALT,        KC_NO,        KC_LGUI,  KC_LGUI, MO(NUMBERS),
                                                         KC_ENTER,KC__MUTE,
+                                                                 KC__VOLUP,
                                                KC_ENTER,KC_BSPC, KC__VOLDOWN,
              // right hand
              KC_BSLS,     KC_6,   KC_7,   KC_8,   KC_9,   KC_0,             KC_BSPC,
@@ -108,10 +110,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 // SYMBOLS
 [SYMB] = KEYMAP(
        // left hand
-       RESET,   KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,    KC_TRNS,
+       RESET,   KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS, KC_TRNS,
        KC_TAB,KC_TRNS, KC_TRNS,KC_TRNS,KC_TRNS,KC_TRNS, KC_TRNS,
        KC_TRNS,KC_LBRC,KC_RBRC,LSFT(KC_LBRC),LSFT(KC_RBRC),KC_TRNS,
-       KC_TRNS,KC_TRNS,KC_TRNS,KC_TRNS,KC_TRNS,KC_TRNS,             KC_TRNS,
+       KC_TRNS,KC_TRNS,KC_TRNS,KC_TRNS,KC_TRNS,KC_TRNS,KC_TRNS,
           TOGGLE,BREATH,KNIGHT,XMAS,OTHER,
                                        KC_TRNS,KC_TRNS,
                                                KC_TRNS,
@@ -126,6 +128,50 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
        KC_TRNS,
        KC_TRNS, KC_TRNS, KC_TRNS
 ),
+
+/* Keymap: Number Layer
+ *
+   * ,--------------------------------------------------.           ,--------------------------------------------------.
+   * |        |      |      |      |      |      |      |           |      |      |      |      |      |      |        |
+   * |--------+------+------+------+------+-------------|           |------+------+------+------+------+------+--------|
+   * |        |      |      |      |      |      |      |           |      |      |  7   |  8   |  9   |      |        |
+   * |--------+------+------+------+------+------|      |           |      |------+------+------+------+------+--------|
+   * |        |      |      |      |      |      |------|           |------|  0   |  4   |   5  |  6   |      |        |
+   * |--------+------+------+------+------+------|      |           |      |------+------+------+------+------+--------|
+   * |        |      |      |      |      |      |      |           |      |      |  1   |   2  |  3   |      |        |
+   * `--------+------+------+------+------+-------------'           `-------------+------+------+------+------+--------'
+   *   |      |      |      |      |      |                                       |      |      |      |      |      |
+   *   `----------------------------------'                                       `----------------------------------'
+   *                                        ,-------------.       ,-------------.
+   *                                        |      |      |       |      |      |
+   *                                 ,------|------|------|       |------+------+------.
+   *                                 |      |      |      |       |      |      |      |
+   *                                 |      |      |------|       |------|      |      |
+   *                                 |      |      |      |       |      |      |      |
+   *                                 `--------------------'       `--------------------'
+ */
+// NUMBERS
+[NUMBERS] = KEYMAP(
+       // left hand
+       RESET,   KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,    KC_TRNS,
+       KC_TAB,KC_TRNS, KC_TRNS,KC_TRNS,KC_TRNS,KC_TRNS, KC_TRNS,
+       KC_TRNS,KC_TRNS,KC_TRNS,KC_TRNS,KC_TRNS,KC_TRNS,
+       KC_TRNS,KC_TRNS,KC_TRNS,KC_TRNS,KC_TRNS,KC_TRNS,             KC_TRNS,
+          KC_TRNS,KC_TRNS,KC_TRNS,KC_TRNS,KC_TRNS,
+                                       KC_TRNS,KC_TRNS,
+                                               KC_TRNS,
+                               KC_TRNS,KC_TRNS,KC_TRNS,
+       // right hand
+       KC_TRNS, KC_TRNS,  KC_TRNS,KC_TRNS,KC_TRNS, KC_TRNS,  KC_TRNS,
+       KC_TRNS, KC_TRNS, KC_7,KC_8,KC_9, KC_TRNS, KC_TRNS,
+                KC_0, KC_4,KC_5,KC_6,KC_TRNS, KC_TRNS,
+       KC_TRNS, KC_TRNS, KC_1,KC_2,KC_3,KC_TRNS,KC_TRNS,
+                         KC_TRNS,KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
+       KC_TRNS, KC_TRNS,
+       KC_TRNS,
+       KC_TRNS, KC_TRNS, KC_TRNS
+),
+
  /* Keymap 3: Tmux layer
    *
    * ,--------------------------------------------------.           ,--------------------------------------------------.
