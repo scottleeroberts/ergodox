@@ -68,7 +68,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 // Otherwise, it needs KC_*
 [BASE] = LAYOUT_ergodox(  // layer 0 : default
         // left hand
-          KC_ESC,         KC_1,         KC_2,   KC_3,   KC_4,   KC_5,         KC_NO,
+          KC_ESC,       KC_1,         KC_2,   KC_3,   KC_4,   KC_5,         KC_NO,
         KC_GRAVE,       KC_Q,         KC_W,   KC_E,   KC_R,   KC_T,         KC_LBRACKET,
         KC_LCTRL,       KC_A,         LGUI_T(KC_S),   LT(TMUX,KC_D),   CTL_T(KC_F),   KC_G,
         KC_LSFT,        KC_Z,         KC_X,   KC_C,   KC_V,   KC_B,         KC_NO,
@@ -95,7 +95,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |--------+------+------+------+------+------|      |           |      |------+------+------+------+------+--------|
  * |        |  [   |   ]  |   {  |   }  |      |------|           |------| left | down | up   | right|      |        |
  * |--------+------+------+------+------+------|      |           |      |------+------+------+------+------+--------|
- * |        |      |      |      |      |      |      |           |      |      | TEAL | RED  | GREEN| BLUE | YELLOW |
+ * |        |      |      |   (  |   )  |      |      |           |      |      | TEAL | RED  | GREEN| BLUE | YELLOW |
  * `--------+------+------+------+------+-------------'           `-------------+------+------+------+------+--------'
  *   |TOGGLE|BREATH|KNIGHT| XMAS | OTHER|                                       |      |RAINBW| STILL| SWIRL|       |
  *   `----------------------------------'                                       `----------------------------------'
@@ -113,7 +113,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
        RESET,   KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS, KC_TRNS,
        KC_TAB,KC_TRNS, KC_TRNS,KC_TRNS,KC_TRNS,KC_TRNS, KC_TRNS,
        KC_TRNS,KC_LBRC,KC_RBRC,LSFT(KC_LBRC),LSFT(KC_RBRC),KC_TRNS,
-       KC_TRNS,KC_TRNS,KC_TRNS,KC_TRNS,KC_TRNS,KC_TRNS,KC_TRNS,
+       KC_TRNS,KC_TRNS,KC_TRNS,KC_LEFT_PAREN,KC_RIGHT_PAREN,KC_TRNS,KC_TRNS,
           TOGGLE,BREATH,KNIGHT,XMAS,OTHER,
                                        KC_TRNS,KC_TRNS,
                                                KC_TRNS,
