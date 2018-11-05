@@ -8,7 +8,7 @@ out to something like `keyboards/ergodox/keymaps/scottleeroberts`.
 ```
 $ git clone https://github.com/jackhumbert/qmk_firmware.git
 $ cd qmk_firmware
-$ git clone https://github.com/scottleeroberts/ergodox.git \keyboards/ergodox/keymaps/scottleeroberts
+$ git clone https://github.com/scottleeroberts/ergodox.git \keyboards/ergodox_ez/keymaps/scottleeroberts
 $ docker run -e keymap=scottleeroberts -e keyboard=ergodox_ez --rm -v $('pwd'):/qmk:rw edasque/qmk_firmware
 $ teensy-loader-cli -mmcu=atmega32u4 -w ergodox_ez_scottleeroberts.hex
 
