@@ -22,6 +22,17 @@ enum custom_keycodes {
   STILL
 };
 
+#define _______ KC_TRNS
+
+#define MY_A LSFT_T(KC_A)
+#define MY_S LGUI_T(KC_S)
+#define MY_D LT(TMUX,KC_D)
+#define MY_F CTL_T(KC_F)
+#define MY_V RCTL(KC_V)
+#define MY_J CTL_T(KC_J)
+#define MY_L LGUI_T(KC_L)
+#define MY_SCLN LSFT_T(KC_SCLN)
+
 #define M_TMUX M(0)
 #define M_TMUX_1 M(1)
 #define M_TMUX_2 M(2)
