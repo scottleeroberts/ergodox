@@ -44,10 +44,10 @@ enum custom_keycodes {
 #define M_TMUX_VS M(8)
 #define M_TMUX_NEW M(9)
 
-#define rgblight_set_teal rgblight_setrgb(0x00, 0xFF, 0xFF)
-#define rgblight_set_red rgblight_setrgb(0xFF, 0x00, 0x00)
-#define rgblight_set_green rgblight_setrgb(0x00, 0xFF, 0x00);
-#define rgblight_set_blue rgblight_setrgb(0x00, 0x00, 0xFF);
+#define rgblight_set_teal   rgblight_setrgb(0x00, 0xFF, 0xFF)
+#define rgblight_set_red    rgblight_setrgb(0xFF, 0x00, 0x00)
+#define rgblight_set_green  rgblight_setrgb(0x00, 0xFF, 0x00);
+#define rgblight_set_blue   rgblight_setrgb(0x00, 0x00, 0xFF);
 #define rgblight_set_yellow rgblight_setrgb(0xFF, 0xFF, 0x00);
 
 void do_tmux_key(keyrecord_t *record, uint8_t code, uint8_t modifier) {
@@ -75,33 +75,15 @@ const macro_t *action_get_macro(keyrecord_t *record, uint8_t id, uint8_t opt)
         unregister_code(KC_LCTRL);
       }
       break;
-    case 1:
-      do_tmux_key(record, KC_1, KC_NO);
-      break;
-    case 2:
-      do_tmux_key(record, KC_2, KC_NO);
-      break;
-    case 3:
-      do_tmux_key(record, KC_3, KC_NO);
-      break;
-    case 4:
-      do_tmux_key(record, KC_4, KC_NO);
-      break;
-    case 5:
-      do_tmux_key(record, KC_5, KC_NO);
-      break;
-    case 6:
-      do_tmux_key(record, KC_LBRC, KC_NO);
-      break;
-    case 7:
-      do_tmux_key(record, KC_QUOT, KC_LSFT);
-      break;
-    case 8:
-      do_tmux_key(record, KC_5, KC_LSFT);
-      break;
-    case 9:
-      do_tmux_key(record, KC_C, KC_NO);
-      break;
+    case 1: do_tmux_key(record, KC_1, KC_NO); break;
+    case 2: do_tmux_key(record, KC_2, KC_NO); break;
+    case 3: do_tmux_key(record, KC_3, KC_NO); break;
+    case 4: do_tmux_key(record, KC_4, KC_NO); break;
+    case 5: do_tmux_key(record, KC_5, KC_NO); break;
+    case 6: do_tmux_key(record, KC_LBRC, KC_NO); break;
+    case 7: do_tmux_key(record, KC_QUOT, KC_LSFT); break;
+    case 8: do_tmux_key(record, KC_5, KC_LSFT); break;
+    case 9: do_tmux_key(record, KC_C, KC_NO); break;
   }
   return MACRO_NONE;
 };
