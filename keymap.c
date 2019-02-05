@@ -3,6 +3,7 @@
 #include "action_layer.h"
 #include "version.h"
 #include "common_keyboard.h"
+#include "common_ergodox.h"
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   /* Keymap 0: Basic layer
