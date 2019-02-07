@@ -12,7 +12,7 @@ enum {
 #define MY_D LT(TMUX,KC_D)
 #define MY_F CTL_T(KC_F)
 #define MY_V RCTL(KC_V)
-#define MY_J CTL_T(KC_J)
+#define MY_N CTL_T(KC_N)
 #define MY_L LGUI_T(KC_L)
 #define MY_SCLN LSFT_T(KC_SCLN)
 
