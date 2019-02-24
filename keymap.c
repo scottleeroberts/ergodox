@@ -9,45 +9,45 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   /* Keymap 0: Basic layer
    *
    * ,--------------------------------------------------.           ,--------------------------------------------------.
-   * | ESC    |   1  |   2  |   3  |   4  |   5  |close |           | |    |   6  |   7  |   8  |   9  |   0  |  Bkspc |
+   * | ESC    |   1  |   2  |   3  |   4  |   5  |      |           |      |   6  |   7  |   8  |   9  |   0  |  Bkspc |
    * |--------+------+------+------+------+-------------|           |------+------+------+------+------+------+--------|
    * | `      |   Q  |   W  |   E  |   R  |   T  |      |           |      |   Y  |   U  |   I  |   O  |   P  |   \    |
-   * |--------+------+------+------+------+------| copy |           |      |------+------+------+------+------+--------|
+   * |--------+------+------+------+------+------|      |           |      |------+------+------+------+------+--------|
    * | CTRL   |   A  |cmd/S |tmux/D|  ^/F |   G  |------|           |------|   H  |  ^/J |  K   |cmd/L |  ;   |   "    |
    * |--------+------+------+------+------+------|      |           |      |------+------+------+------+------+--------|
-   * | LShift |   Z  |   X  |   C  |   V  |   B  |paste |           |tCAPS |   N  |   M  |   ,  |   .  |  /   |   =    |
+   * | LShift |   Z  |   X  |   C  |   V  |   B  |      |           |      |   N  |   M  |   ,  |   .  |  /   |   =    |
    * `--------+------+------+------+------+-------------'           `-------------+------+------+------+------+--------'
-   *   |LAlt  |      |      |      |NumLayer|                                       |  L1  |      |      |      |      |
+   *   |      |      |      | lALT |NumLayer|                                       |  L1  |      |      |      |      |
    *   `----------------------------------'                                       `----------------------------------'
    *                                        ,-------------.       ,-------------.
    *                                        |      |      |       |      |      |
    *                                 ,------|------|------|       |------+--------+------.
    *                                 |      |      |      |       |      |        |      |
-   *                                 | Enter|Backsp|------|       |------|  Tab   |Space |
-   *                                 |      |ace   |      |       |      |        |      |
+   *                                 | Enter|      |------|       |------|  Tab   |Space |
+   *                                 |      |      |      |       |      |        |      |
    *                                 `--------------------'       `----------------------'
    */
   // If it accepts an argument (i.e, is a function), it doesn't need KC_.
   // Otherwise, it needs KC_*
   [BASE] = LAYOUT_ergodox(  // layer 0 : default
       // left hand
-      KC_ESC  ,KC_1    ,KC_2   ,KC_3   ,KC_4   ,KC_5   ,RCTL(KC_W),
-      KC_GRAVE,KC_Q    ,KC_W   ,KC_E   ,KC_R   ,KC_T   ,RCTL(KC_C),
+      KC_ESC  ,KC_1    ,KC_2   ,KC_3   ,KC_4   ,KC_5   ,_______,
+      KC_GRAVE,KC_Q    ,KC_W   ,KC_E   ,KC_R   ,KC_T  ,_______,
       KC_LCTRL,MY_A    ,MY_S   ,MY_D   ,MY_F   ,KC_G,
       KC_LSFT ,KC_Z    ,KC_X   ,KC_C   ,KC_V   ,KC_B   ,MY_V,
-      KC_LALT ,KC_NO   ,KC_LGUI,KC_LGUI,MO(NUMBERS),
-      KC_ENTER,_______,
+      _______ ,_______   ,_______,KC_LALT,MO(NUMBERS),
+      _______,_______,
       _______,
-      KC_ENTER,KC_BSPC , _______,
+      KC_ENTER,_______ , _______,
       // right hand
-      KC_BSLS ,KC_6    ,KC_7   ,KC_8   ,KC_9   ,KC_0   ,KC_BSPC,
-      KC_RBRC ,KC_Y    ,KC_U   ,KC_I   ,KC_O   ,KC_P   ,KC_MINS,
+      _______ ,KC_6    ,KC_7   ,KC_8   ,KC_9   ,KC_0   ,KC_BSPC,
+      _______ ,KC_Y    ,KC_U   ,KC_I   ,KC_O   ,KC_P   ,KC_MINS,
       KC_H    ,MY_J    ,KC_K   ,MY_L   ,MY_SCLN,KC_QUOT,
-      M_TMUX  ,KC_N    ,KC_M   ,KC_COMM,KC_DOT ,KC_SLSH,KC_EQUAL,
-      MO(SYMB),KC_NO   ,KC_NO  ,KC_NO  ,KC_NO,
-      KC_NO   ,KC_NO,
-      KC_NO,
-      KC_NO   ,KC_TAB  ,KC_SPC
+      _______  ,KC_N    ,KC_M   ,KC_COMM,KC_DOT ,KC_SLSH,KC_EQUAL,
+      MO(SYMB),_______   ,_______  ,_______  ,_______,
+      _______ ,_______,
+      _______ ,
+      _______ ,KC_TAB  ,KC_SPC
       ),
 
 
@@ -76,7 +76,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [SYMB] = LAYOUT_ergodox(
       // left hand
       RESET  ,_______,_______,_______,_______,_______,_______,
-      KC_TAB ,_______,_______,_______,_______,_______,_______,
+      KC_TILD, KC_EXLM , KC_AT,  KC_HASH, KC_DLR,  KC_PERC, _______,
       _______,KC_LBRC,KC_RBRC,LSFT(KC_LBRC),LSFT(KC_RBRC),_______,
       _______,_______,_______,KC_LEFT_PAREN,KC_RIGHT_PAREN,_______,_______,
       TOGGLE ,BREATH ,KNIGHT ,XMAS ,OTHER,
@@ -85,8 +85,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
       _______,_______,_______,
       // right hand
       _______   ,_______,_______,_______,_______,_______,_______,
-      _______   ,KC_BSLS,_______,_______,_______,_______,_______,
-      KC_LEFT   ,KC_DOWN,KC_UP ,KC_RIGHT,_______, _______,
+      _______   ,KC_CIRC,KC_AMPR,KC_ASTR,KC_LEFT_PAREN,KC_RIGHT_PAREN, KC_PIPE,
+      KC_LEFT   ,KC_DOWN,KC_UP ,KC_RIGHT,_______, KC_BSLS,
       _______   ,_______,TEAL   ,RED     ,BLUE   ,GREEN   ,YELLOW,
       _______   ,STILL  ,RAINBOW,SWIRL   ,_______,
       _______   ,_______,
@@ -135,7 +135,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
       KC_0   ,_______,_______,_______,_______,
       _______,_______,
       _______,
-      _______,_______,_______
+      _______,_______,KC_TAB
       ),
       /* Keymap 3: Tmux layer
        *
