@@ -1,1 +1,14 @@
-*.hex
+# Build artifacts
+build/
+*.bin
+*.elf
+
+# Temporary files
+*.swp
+*.swo
+*~
+.DS_Store
+
+# IDE
+.vscode/
+.idea/
