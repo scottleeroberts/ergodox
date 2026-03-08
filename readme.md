@@ -14,57 +14,18 @@ Custom QMK firmware for Ergodox EZ Shine with home-row modifiers and tmux integr
 
 ## Building and Flashing
 
-### Prerequisites
+**Complete instructions: [MANUAL_BUILD_FLASH.md](MANUAL_BUILD_FLASH.md)**
 
+Built against QMK firmware [`9e8199c`](https://github.com/qmk/qmk_firmware/commit/9e8199c41189a2eb6243600bf3f96f136650820b).
+
+**Quick reference** (if you've already done the setup):
 ```bash
-# Install Docker
-sudo apt install docker.io
-sudo systemctl start docker
-sudo usermod -aG docker $USER
-# Log out and back in for group to take effect
-
-# Install Teensy loader (for flashing)
-sudo apt install teensy-loader-cli
-```
-
-### Build
-
-```bash
-cd ~/scottleeroberts/ergodox
-mkdir -p build && cd build
-
-# Clone QMK (first time only)
-git clone https://github.com/qmk/qmk_firmware.git
-cd qmk_firmware
-git submodule update --init --recursive
-
-# Copy keymap files
-mkdir -p keyboards/ergodox_ez/keymaps/scottleeroberts
-cp ../../keymap.c keyboards/ergodox_ez/keymaps/scottleeroberts/
-cp ../../config.h keyboards/ergodox_ez/keymaps/scottleeroberts/
-cp ../../rules.mk keyboards/ergodox_ez/keymaps/scottleeroberts/
-
-# Build firmware (use ergodox_ez/shine for Shine variant, ergodox_ez/base for Base)
+# Build (from build/qmk_firmware directory)
 docker run --rm -v $(pwd):/qmk_firmware -w /qmk_firmware ghcr.io/qmk/qmk_cli \
   make ergodox_ez/shine:scottleeroberts
 
-# Copy hex out
-cp ergodox_ez_shine_scottleeroberts.hex ../..
-cd ../..
-```
-
-### Flash
-
-The Ergodox EZ uses the Teensy/Halfkay bootloader. Press the small RESET button on the back of the keyboard (or hit QK_BOOT on the Numbers layer), then:
-
-```bash
+# Flash (press RESET button or hold Numbers + ESC first)
 teensy_loader_cli -v -mmcu=atmega32u4 -w ergodox_ez_shine_scottleeroberts.hex
-```
-
-Or use QMK's built-in flash:
-```bash
-# From build/qmk_firmware directory
-make ergodox_ez/shine:scottleeroberts:flash
 ```
 
 ## Layer Guide
@@ -164,6 +125,7 @@ Activated by holding D key. All macros send Ctrl+Space prefix:
 | `keymap.c` | Main keymap and macro definitions |
 | `config.h` | Keyboard configuration settings |
 | `rules.mk` | Build rules and feature enables |
+| `MANUAL_BUILD_FLASH.md` | Complete build and flash instructions |
 
 ## Variants
 
